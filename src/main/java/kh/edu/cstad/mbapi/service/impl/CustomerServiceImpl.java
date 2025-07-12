@@ -95,19 +95,4 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
-    @Override
-    public void deleteByPhoneNumber(String phoneNumber) {
-
-        Customer customer = customerRepository.findByPhoneNumber(phoneNumber)
-                .orElseThrow(
-                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer Phone Number Not Found")
-                );
-
-        customer.setIsDeleted(true);
-        customerRepository.save(customer);
-
-
-    }
-
-
 }
