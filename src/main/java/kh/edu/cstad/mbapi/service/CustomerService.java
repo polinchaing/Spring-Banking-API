@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface CustomerService {
 
+    void disableByPhoneNumber(String phoneNumber);
+
     CustomerResponse createNew(CreateCustomerRequest createCustomerRequest);
 
     List<CustomerResponse> findAll();

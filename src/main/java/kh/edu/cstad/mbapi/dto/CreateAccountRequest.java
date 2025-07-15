@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 public record CreateAccountRequest(
         String phoneNumber,
         BigDecimal balance,
-        BigDecimal overLimit
+        BigDecimal overLimit,
+        String accountType
 ) {
 }

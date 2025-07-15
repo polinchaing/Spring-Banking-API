@@ -41,4 +41,7 @@ public class Customer {
 
     @OneToOne(mappedBy="customer")
     private KYC kyc;
+
+    @ManyToOne(optional = false)
+    private CustomerSegment customerSegment;
 }

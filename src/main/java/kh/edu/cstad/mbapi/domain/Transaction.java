@@ -17,21 +17,24 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "sender", nullable = false)
-    private Account sender;
-
-    @ManyToOne
-    @JoinColumn(name = "receiver", nullable = false)
-    private Account receiver;
-
     @Column(nullable = false)
     private BigDecimal amount;
 
     @Column(columnDefinition="TEXT")
     private String remark;
 
+    @Column(nullable=false)
+    private Boolean isDeleted;
+
     @ManyToOne
     private TransactionType transactionType;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "sender", nullable = false)
+    private Account sender;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "receiver", nullable = false)
+    private Account receiver;
 
 }

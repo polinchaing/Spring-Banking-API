@@ -1,6 +1,5 @@
 package kh.edu.cstad.mbapi.controller;
 
-import kh.edu.cstad.mbapi.domain.Account;
 import kh.edu.cstad.mbapi.dto.AccountResponse;
 import kh.edu.cstad.mbapi.dto.CreateAccountRequest;
 import kh.edu.cstad.mbapi.dto.DisableAccountRequest;

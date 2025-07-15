@@ -8,6 +8,8 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
+
 
 @Mapper(componentModel = "spring") // using componentModel To Create BEAN
 public interface CustomerMapper {
@@ -19,6 +21,8 @@ public interface CustomerMapper {
 
     CustomerResponse toCustomerResponse(Customer customer);
 
+    @Mapping(target = "customerSegment", ignore = true)
+    @Mapping(target = "kyc", ignore = true)
     Customer fromCreateCustomerRequest(CreateCustomerRequest createCustomerRequest);
 
     //2 reference
