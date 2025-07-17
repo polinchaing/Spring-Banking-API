@@ -3,6 +3,7 @@
     import java.math.BigDecimal;
 
     public record UpdateAccountRequest(
-            BigDecimal overLimit
+            BigDecimal overLimit,
+            String accountName
     ) {
     }

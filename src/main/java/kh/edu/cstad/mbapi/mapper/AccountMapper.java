@@ -10,10 +10,8 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
 
-   @Mapping(target = "accountType", ignore = true)
-   Account fromCreateAccountRequest(CreateAccountRequest createAccountRequest);
 
-   @Mapping(target = "accountType", source = "accountType")
+   @Mapping(source = "accountType.type", target = "accountType")
    AccountResponse toAccountResponse(Account account);
 
    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

@@ -1,5 +1,7 @@
 package kh.edu.cstad.mbapi.dto;
 
+import java.time.LocalDate;
+
 public record CreateCustomerRequest(
         String fullName,
         String gender,
@@ -7,6 +9,7 @@ public record CreateCustomerRequest(
         String phoneNumber,
         String remark,
         String nationalIdCard,
-        String segment
+        String dob,
+        String customerSegment
 ) {
 }

@@ -21,11 +21,23 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String accountNo;
+    @Column(nullable = false)
+    private String accName;
 
+    @Column(nullable = false)
+    private String accNo;
+
+    @Column(nullable = false)
     private BigDecimal balance;
 
+    @Column(nullable = false)
     private BigDecimal overLimit;
+
+    @Column(nullable = false,length = 10)
+    private String accCurrency;
+
+    @Column(nullable = false)
+    private Boolean isHide;
 
     @Column(nullable=false)
     private Boolean isDeleted;
@@ -35,6 +47,7 @@ public class Account {
     private Customer customer;
 
     @ManyToOne(optional=false)
+    @JoinColumn(name = "acc_type", nullable = false)
     private AccountType accountType;
 
     @OneToMany(mappedBy = "sender")

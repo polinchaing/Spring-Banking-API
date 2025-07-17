@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface CustomerSegmentRepository extends JpaRepository<CustomerSegment, Integer> {
 
-    Optional<CustomerSegment> getCustomerSegmentBySegmentName(String segmentName);
+    Optional<CustomerSegment> findBySegment(String segment);
 
 }

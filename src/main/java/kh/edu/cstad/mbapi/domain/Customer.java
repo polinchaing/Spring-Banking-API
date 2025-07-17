@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -23,6 +24,9 @@ public class Customer {
     @Column(nullable = false,length=10)
     private String gender;
 
+    @Column(nullable=false,length=10)
+    private String dob;
+
     @Column(unique = true ,length=100)
     private String email;
 
@@ -39,7 +43,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<Account> accounts;
 
-    @OneToOne(mappedBy="customer")
+    @OneToOne(mappedBy="customer",cascade=CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private KYC kyc;
 
     @ManyToOne(optional = false)

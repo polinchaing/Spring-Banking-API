@@ -44,6 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponse createNew(CreateCustomerRequest createCustomerRequest) {
+        log.info(createCustomerRequest.toString());
 
         //check condition existsByEmail
         if(customerRepository.existsByEmail(createCustomerRequest.email())){
@@ -61,31 +62,35 @@ public class CustomerServiceImpl implements CustomerService {
             );
         }
 
+        //validation national ID Card for Creating KYC
+        if(kycRepository.existsByNationalIdCard(createCustomerRequest.nationalIdCard())){
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "National ID Card already exists"
+            );
+        }
+
+        //validation Customer Segment
         CustomerSegment customerSegment = customerSegmentRepository
-                .getCustomerSegmentBySegmentName(createCustomerRequest.segment())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer segment not found"));
+                .findBySegment(createCustomerRequest.customerSegment())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer segment not found"));
 
         Customer customer = customerMapper.fromCreateCustomerRequest(createCustomerRequest);
-        customer.setIsDeleted(false);
         customer.setCustomerSegment(customerSegment);
+        customer.setIsDeleted(false);
 
-        customer = customerRepository.save(customer);
-        customerRepository.flush();
+       KYC kyc = new KYC();
+       kyc.setCustomer(customer);
+       kyc.setNationalIdCard(createCustomerRequest.nationalIdCard());
+       kyc.setIsDeleted(false);
+       kyc.setIsVerified(false);
+       customer.setKyc(kyc);
 
+        log.info("Customer");
 
-        if (!kycRepository.existByNationalIdCard(createCustomerRequest.nationalIdCard())) {
-            KYC kyc = new KYC();
-            kyc.setNationalIdCard(createCustomerRequest.nationalIdCard());
-            kyc.setIsVerified(false);
-            kyc.setIsDeleted(false);
-            kyc.setCustomer(customer);
+       customer = customerRepository.save(customer);
 
-            kycRepository.save(kyc);
-
-            return customerMapper.toCustomerResponse(customer);
-        } else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "National card already exists");
-        }
+       return customerMapper.toCustomerResponse(customer);
 
     }
 
@@ -120,6 +125,7 @@ public class CustomerServiceImpl implements CustomerService {
         customerMapper.toCustomerPartially
                 (updateCustomerRequest,
                         customer);
+
 
         customerRepository.save(customer);
 

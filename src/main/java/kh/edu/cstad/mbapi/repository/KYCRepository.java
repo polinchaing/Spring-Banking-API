@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface KYCRepository extends JpaRepository<KYC, String> {
 
-    Boolean existByNationalIdCard(String nationalIdCard);
+    Boolean existsByNationalIdCard(String nationalIdCard);
 
     Optional<KYC> findByNationalIdCard(String nationalIdCard);
 

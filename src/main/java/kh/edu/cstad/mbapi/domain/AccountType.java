@@ -20,12 +20,11 @@ public class AccountType {
     private Integer id;
 
     @Column(nullable=false,unique=true,length=100)
-    private String accountType; //eg PAYROLL, SAVING, CREDIT, DEBIT, JUNIOR,
+    private String type; //eg PAYROLL, SAVING, CREDIT, DEBIT, JUNIOR,
 
     @Column(nullable=false)
     private Boolean isDeleted;
 
     @OneToMany(mappedBy="accountType")
-    @JoinColumn(nullable=false)
     private List<Account> account;
 }

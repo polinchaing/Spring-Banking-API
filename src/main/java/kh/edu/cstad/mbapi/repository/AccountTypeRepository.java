@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface AccountTypeRepository extends JpaRepository<AccountType, Integer> {
 
-    Optional<AccountType> findAccountTypeByType(String type);
+    Optional<AccountType> findByType(String type);
 
 }

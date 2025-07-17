@@ -25,11 +25,9 @@ public class CustomerSegment {
 
     private String Description;
 
-    private BigDecimal overLimit;
-
     @Column(nullable=false)
     private Boolean isDeleted;
 
-    @OneToMany(mappedBy="customerSegment")
+    @OneToMany(mappedBy="customerSegment",fetch=FetchType.EAGER)
     List<Customer> customer;
 }

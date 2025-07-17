@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-    Boolean existsByAccountNo(String accountNo);
+    Boolean existsByAccNo(String accNo);
 
-    Optional<Account> findByAccountNo(String accountNo);
+    Optional<Account> findByAccNo(String accNo);
 
-    void deleteByAccountNo(String accountNo);
+    void deleteByAccNo(String accNo);
 
     Optional<Account> findByCustomer(Customer customer);
 

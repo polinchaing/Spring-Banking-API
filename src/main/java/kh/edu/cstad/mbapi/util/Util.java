@@ -19,7 +19,7 @@ public class Util {
         do {
             String num = "00" + String.format("%07d", random.nextInt(10_000_000));
             accountNo = num.replaceAll("(.{3})(?!$)", "$1_");
-        } while (accountRepository.existsByAccountNo(accountNo));
+        } while (accountRepository.existsByAccNo(accountNo));
         return accountNo;
     }
 }
