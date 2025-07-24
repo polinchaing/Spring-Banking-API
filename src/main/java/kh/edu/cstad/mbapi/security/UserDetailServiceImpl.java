@@ -24,6 +24,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
         CustomUserDetails customUserDetails = new CustomUserDetails();
         customUserDetails.setUser(user);
 
-        return null;
+        return customUserDetails;
     }
 }
